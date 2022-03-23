@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "531800762189",
+    "firebase_url": "https://eshopp-6f650-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "eshopp-6f650",
+    "storage_bucket": "eshopp-6f650.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531800762189:android:bb81558167f5ccca6d3904",
+        "android_client_info": {
+          "package_name": "com.example.logineshopping"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531800762189-3ed6ej02hre5lbgsurhhtsfn7kdqq4r4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDudf1Ks6KfwpiFPwQaKYu9bo2fsxGqNI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "531800762189-3ed6ej02hre5lbgsurhhtsfn7kdqq4r4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
