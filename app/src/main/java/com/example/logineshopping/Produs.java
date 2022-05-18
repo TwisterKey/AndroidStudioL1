@@ -1,14 +1,14 @@
 package com.example.logineshopping;
 
-public class Upload {
+public class Produs {
     private String mName;
     private String mImageUrl;
 
-    public Upload(){
+    public Produs(){
 
     }
 
-    public Upload(String name, String imageUrl){
+    public Produs(String imageUrl, String name){
         if(name.trim().equals(""))
             name="Fara nume";
 

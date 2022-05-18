@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -36,6 +37,7 @@ public class MainPage extends AppCompatActivity {
     private EditText nume_fisier;
     private ImageView imageview;
     private ProgressBar progressbar;
+    private Button meniu;
 
     private Uri imagineuri;
 
@@ -57,6 +59,14 @@ public class MainPage extends AppCompatActivity {
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, pick_image_request);
+            }
+        });
+
+        meniu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainPage.this, Lista.class);
+                MainPage.this.startActivity(intent);
             }
         });
 
@@ -87,6 +97,7 @@ public class MainPage extends AppCompatActivity {
         nume_fisier = findViewById(R.id.nume_fisier);
         imageview = findViewById(R.id.imageView);
         progressbar = findViewById(R.id.progressBar);
+        meniu = findViewById(R.id.button3);
     }
 
     private String getFileExtension(Uri uri){
@@ -98,21 +109,31 @@ public class MainPage extends AppCompatActivity {
     void uploadFile(){
         if(imagineuri != null){
             StorageReference FileReference = mStorageRef.child(System.currentTimeMillis()+"."+getFileExtension(imagineuri));
+            Log.e("yyyyyyyyyyyyyyyyyyyyyy", String.valueOf(imagineuri));
             FileReference.putFile(imagineuri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    progressbar.setProgress(0);
-                                }
-                            }, 5000); // da delay la progressbar pentru 5 secunde
-                            Toast.makeText(MainPage.this, "Succes", Toast.LENGTH_SHORT).show();
-                            Upload upload = new Upload(nume_fisier.getText().toString().trim(), taskSnapshot.getMetadata().getReference().getDownloadUrl().toString());
-                            String uploadId = mDatabaseRef.push().getKey(); // alta intrare in baza de date cu un id unic
-                            mDatabaseRef.child(uploadId).setValue(upload);
+                           FileReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                               @Override
+                               public void onSuccess(Uri uri) {
+                                   Toast.makeText(MainPage.this, "Succes", Toast.LENGTH_SHORT).show();
+                                   Produs produs = new Produs(uri.toString(), nume_fisier.getText().toString().trim());
+                                   String uploadId = mDatabaseRef.push().getKey(); // alta intrare in baza de date cu un id unic
+                                   mDatabaseRef.child(uploadId).setValue(produs);
+                               }
+                           });
+//                            Handler handler = new Handler();
+//                            handler.postDelayed(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    progressbar.setProgress(0);
+//                                }
+//                            }, 5000); // da delay la progressbar pentru 5 secunde
+
+
+
+
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {

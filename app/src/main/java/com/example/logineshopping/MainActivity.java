@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText t1;
     private EditText t2;
-    private static final String TAG = "EmailPassword";
+    //private static final String TAG = "EmailPassword";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
                         });
             }
         });
+
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.startActivity(intent);
             }
         });
-
     }
 
     private void viewSetup(){
@@ -81,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
         register = findViewById(R.id.register);
         t1 = findViewById(R.id.editTextTextEmailAddress);
         t2 = findViewById(R.id.editTextTextPassword);
-
     }
+
     private void updateUI(FirebaseUser user) {
 
     }
