@@ -44,7 +44,7 @@ public class ResetareParolaActivity extends AppCompatActivity {
                             }
                         });
 
-                Intent intent = new Intent(ResetareParolaActivity.this, MainActivity.class);
+                Intent intent = new Intent(ResetareParolaActivity.this, Login.class);
                 ResetareParolaActivity.this.startActivity(intent);
             }
         });

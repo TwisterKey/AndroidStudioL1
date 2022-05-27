@@ -12,10 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginEShopping">
         <activity
+            android:name=".ProfilUtilizator"
+            android:exported="false" />
+        <activity
             android:name=".ListaProduseActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Login"
             android:exported="true" />
         <activity
             android:name=".ResetareParolaActivity"

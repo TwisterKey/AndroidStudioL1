@@ -24,6 +24,8 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText t1;
     private EditText t2;
     private EditText t3;
+    private EditText t4;
+    private EditText t5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         b0.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, Login.class);
                 RegisterActivity.this.startActivity(intent);
             }
         });
@@ -48,13 +50,16 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = t2.getText().toString().trim();
                 String nume = t1.getText().toString().trim();
                 String parola = t3.getText().toString().trim();
+                String adresa = t4.getText().toString().trim();
+                String telefon = t5.getText().toString().trim();
+                String admin = "0";
 
                 mAuth.createUserWithEmailAndPassword(email, parola)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    User user = new User(nume, email);
+                                    User user = new User(nume, email, adresa, telefon, admin);
 
                                     FirebaseDatabase.getInstance().getReference("Users")
                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
@@ -76,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         });
 
-                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                Intent intent = new Intent(RegisterActivity.this, Login.class);
                 RegisterActivity.this.startActivity(intent);
             }
         });
@@ -89,5 +94,7 @@ public class RegisterActivity extends AppCompatActivity {
         t1 = findViewById(R.id.editTextTextPersonName);
         t2 = findViewById(R.id.editTextTextEmailAddress3);
         t3 = findViewById(R.id.editTextTextPassword3);
+        t4 = findViewById(R.id.editTextTextPostalAddress);
+        t5 = findViewById(R.id.editTextTextNumarTelefon);
     }
 }

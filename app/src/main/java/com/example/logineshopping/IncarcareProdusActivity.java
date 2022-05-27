@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
@@ -37,6 +38,8 @@ public class IncarcareProdusActivity extends AppCompatActivity {
     private ImageView imageview;
     private ProgressBar progressbar;
     private Button meniu;
+    private EditText descriere_produs;
+    private EditText pret_prdus;
 
     private Uri imagineuri;
 
@@ -97,6 +100,8 @@ public class IncarcareProdusActivity extends AppCompatActivity {
         imageview = findViewById(R.id.imageView);
         progressbar = findViewById(R.id.progressBar);
         meniu = findViewById(R.id.button3);
+        descriere_produs = findViewById(R.id.descriere_produs);
+        pret_prdus = findViewById(R.id.pret_produs);
     }
 
     private String getFileExtension(Uri uri) {
@@ -119,20 +124,20 @@ public class IncarcareProdusActivity extends AppCompatActivity {
                                 public void onSuccess(Uri uri) {
                                     Toast.makeText(IncarcareProdusActivity.this, "Succes", Toast.LENGTH_SHORT).show();
 
-                                    Produs produs = new Produs(uri.toString(), nume_fisier.getText().toString().trim());
+                                    Produs produs = new Produs(uri.toString(), nume_fisier.getText().toString().trim(), descriere_produs.getText().toString().trim(), pret_prdus.getText().toString());
                                     String uploadId = mDatabaseRef.push().getKey(); // alta intrare in baza de date cu un id unic
 
                                     mDatabaseRef.child(uploadId).setValue(produs);
                                 }
                             });
 
-//                            Handler handler = new Handler();
-//                            handler.postDelayed(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    progressbar.setProgress(0);
-//                                }
-//                            }, 5000); // da delay la progressbar pentru 5 secunde
+                            Handler handler = new Handler();
+                            handler.postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    progressbar.setProgress(0);
+                                }
+                            }, 5000); // da delay la progressbar pentru 5 secunde
 
 
                         }

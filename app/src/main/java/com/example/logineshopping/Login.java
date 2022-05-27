@@ -16,7 +16,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class Login extends AppCompatActivity {
     private Button register;
     private Button login;
     private Button reset;
@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-                MainActivity.this.startActivity(intent);
+                Intent intent = new Intent(Login.this, RegisterActivity.class);
+                Login.this.startActivity(intent);
             }
         });
 
@@ -52,13 +52,13 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(MainActivity.this, "Succes", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Login.this, "Succes", Toast.LENGTH_LONG).show();
 
                                     // Sign in success, update UI with the signed-in user's information
-                                    Intent intent = new Intent(MainActivity.this, IncarcareProdusActivity.class);
-                                    MainActivity.this.startActivity(intent);
+                                    Intent intent = new Intent(Login.this, ListaProduseActivity.class);
+                                    Login.this.startActivity(intent);
                                 } else {
-                                    Toast.makeText(MainActivity.this, "Failure", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(Login.this, "Failure", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -68,8 +68,8 @@ public class MainActivity extends AppCompatActivity {
         reset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ResetareParolaActivity.class);
-                MainActivity.this.startActivity(intent);
+                Intent intent = new Intent(Login.this, ResetareParolaActivity.class);
+                Login.this.startActivity(intent);
             }
         });
     }

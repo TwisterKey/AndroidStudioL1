@@ -14,6 +14,8 @@ import com.example.logineshopping.R;
 import com.example.logineshopping.model.Produs;
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class ProdusAdapter extends RecyclerView.Adapter<ProdusAdapter.ProdusViewHolder> {
@@ -38,6 +40,8 @@ public class ProdusAdapter extends RecyclerView.Adapter<ProdusAdapter.ProdusView
         Produs produsCurent = produsList.get(position);
 
         holder.textViewNumeProdus.setText(produsCurent.getName());
+        holder.descriere.setText(produsCurent.getDescriere());
+        holder.pret.setText(produsCurent.getPret());
         Picasso.with(context)
                 .load(produsCurent.getImageUrl())
                 .placeholder(R.mipmap.ic_launcher)
@@ -54,12 +58,16 @@ public class ProdusAdapter extends RecyclerView.Adapter<ProdusAdapter.ProdusView
     public class ProdusViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewNumeProdus;
         public ImageView imageViewImagineProdus;
+        public TextView descriere;
+        public TextView pret;
 
         public ProdusViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewNumeProdus = itemView.findViewById(R.id.text_view_numeProdus);
             imageViewImagineProdus = itemView.findViewById(R.id.image_view_imagineProdus);
+            descriere = itemView.findViewById(R.id.text_view_descriereprodus);
+            pret = itemView.findViewById(R.id.text_view_pret);
         }
     }
 }
