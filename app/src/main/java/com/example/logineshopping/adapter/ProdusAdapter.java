@@ -18,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.logineshopping.IncarcareProdusActivity;
 import com.example.logineshopping.ListaProduseActivity;
+import com.example.logineshopping.ProfilUtilizator;
 import com.example.logineshopping.R;
+import com.example.logineshopping.UpdateProdus;
 import com.example.logineshopping.model.Produs;
 import com.example.logineshopping.model.User;
 import com.google.firebase.auth.FirebaseAuth;
@@ -123,6 +125,38 @@ public class ProdusAdapter extends RecyclerView.Adapter<ProdusAdapter.ProdusView
                                 if(stergere_produs.getTag().toString()==postSnapshot.child("id").getValue().toString())
                                 {
                                     postSnapshot.getRef().removeValue();
+                                    ((ListaProduseActivity)context).refreshActivity();
+                                }
+
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            throw databaseError.toException();
+                        }});
+                }
+            });
+
+            update_produs.setOnClickListener(new View.OnClickListener() {
+                String str;
+                @Override
+                public void onClick(View v) {
+                    refprod.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                                //  System.out.println(holder.stergere_produs.getTag());
+                                //  System.out.println(postSnapshot.child("imageUrl").getValue().toString());
+                                if(stergere_produs.getTag().toString()==postSnapshot.child("id").getValue().toString())
+                                {
+                                    String a;
+                                    UpdateProdus updateProdus = new UpdateProdus();
+                                    updateProdus.setid(postSnapshot.child("id").getValue().toString());
+                                    System.out.println(updateProdus.getId()+ "22222222222222222222");
+                                    Intent i = new Intent(context, UpdateProdus.class);
+                                    i.putExtra("id",postSnapshot.child("id").getValue().toString());
+                                    context.startActivity(i);
                                     ((ListaProduseActivity)context).refreshActivity();
                                 }
 
