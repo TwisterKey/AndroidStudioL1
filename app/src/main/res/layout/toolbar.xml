@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/purple_500"
+    android:elevation="4dp">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/Cont"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_account_box_24"
+            android:layout_margin="16dp"></ImageView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/Cont"
+            android:id="@+id/Cart"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_baseline_shopping_cart_24"></ImageView>
+
+        <ImageView
+            android:id="@+id/Help"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/Cart"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_baseline_help_center_24"></ImageView>
+
+        <ImageView
+            android:id="@+id/Profil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_baseline_face_24"></ImageView>
+
+        <ImageView
+            android:id="@+id/Logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_baseline_close_24"></ImageView>
+
+        <ImageView
+            android:id="@+id/Adaugare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/Logout"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_baseline_add_to_photos_24"></ImageView>
+
+
+    </RelativeLayout>
+
+</androidx.appcompat.widget.Toolbar>
