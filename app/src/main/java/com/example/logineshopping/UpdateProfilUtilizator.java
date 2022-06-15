@@ -100,7 +100,7 @@ public class UpdateProfilUtilizator extends AppCompatActivity {
                     reference.child(userID).child("numar_telefon").setValue(editTelefon.getText().toString());
 
 
-                Intent intent = new Intent(UpdateProfilUtilizator.this, ProfilUtilizator.class);
+                Intent intent = new Intent(UpdateProfilUtilizator.this, ListaProduseActivity.class);
                 UpdateProfilUtilizator.this.startActivity(intent);
             }
         });
