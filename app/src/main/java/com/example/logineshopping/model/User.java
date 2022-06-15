@@ -1,5 +1,8 @@
 package com.example.logineshopping.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class User {
     public String nume, email, adresa, numar_telefon, admin;
 
@@ -14,6 +17,7 @@ public class User {
         this.numar_telefon = numar_telefon;
         this.admin = admin;
     }
+
 
     public String getNume() {
         return nume;

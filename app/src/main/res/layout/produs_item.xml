@@ -34,7 +34,8 @@
             android:layout_marginBottom="8dp"
             android:text="hau"
             android:textColor="@color/black"
-            android:textSize="20sp" /> />
+            android:textSize="20sp" />
+        />
 
         <TextView
             android:id="@+id/text_view_pret"
@@ -45,7 +46,22 @@
             android:layout_marginBottom="8dp"
             android:text="Pret"
             android:textColor="@color/black"
-            android:textSize="20sp" /> />
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/Update_produs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update" />
+
+        <Button
+            android:id="@+id/Stergere_produs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Stergere produs" /><![CDATA[
+
+        />
+    ]]>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

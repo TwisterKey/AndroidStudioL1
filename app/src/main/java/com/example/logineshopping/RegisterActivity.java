@@ -68,7 +68,6 @@ public class RegisterActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
                                                         Toast.makeText(RegisterActivity.this, "Clientul s-a inregistrat cu succes", Toast.LENGTH_LONG).show();
-
                                                         finish();
                                                     } else {
                                                         Toast.makeText(RegisterActivity.this, "Datele nu sunt introduse corespunzator", Toast.LENGTH_LONG).show();
@@ -81,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
                             }
                         });
 
-                Intent intent = new Intent(RegisterActivity.this, Login.class);
+                Intent intent = new Intent(RegisterActivity.this, ListaProduseActivity.class);
                 RegisterActivity.this.startActivity(intent);
             }
         });

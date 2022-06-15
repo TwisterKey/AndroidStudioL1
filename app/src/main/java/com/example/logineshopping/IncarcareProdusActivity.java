@@ -56,6 +56,7 @@ public class IncarcareProdusActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference("Uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Uploads");
 
+
         alegeImagine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,8 +127,10 @@ public class IncarcareProdusActivity extends AppCompatActivity {
 
                                     Produs produs = new Produs(uri.toString(), nume_fisier.getText().toString().trim(), descriere_produs.getText().toString().trim(), pret_prdus.getText().toString());
                                     String uploadId = mDatabaseRef.push().getKey(); // alta intrare in baza de date cu un id unic
-
+                                    produs.setId(uploadId);
                                     mDatabaseRef.child(uploadId).setValue(produs);
+                                    //String key = mDatabaseRef.child("Users").push().getKey();
+
                                 }
                             });
 
