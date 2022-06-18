@@ -82,6 +82,7 @@ public class Produs {
     public String getLocatie() {
         return locatie;
     }
+
     public void setLocatie(String locatie){this.locatie=locatie;}
 
     public void setDescriere(String descriere) {

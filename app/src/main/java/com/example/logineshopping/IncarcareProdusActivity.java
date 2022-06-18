@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -55,6 +56,7 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
 import java.io.IOException;
 import java.security.SignatureSpi;
@@ -98,13 +100,6 @@ public class IncarcareProdusActivity extends AppCompatActivity {
         mStorageRef = FirebaseStorage.getInstance().getReference("Uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Uploads");
 
-        try {
-            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
-                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
         geocoder = new Geocoder(this, Locale.getDefault());
 
 
@@ -118,13 +113,13 @@ public class IncarcareProdusActivity extends AppCompatActivity {
         alegeImagine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//                if(ContextCompat.checkSelfPermission(IncarcareProdusActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-//                    ActivityCompat.requestPermissions(IncarcareProdusActivity.this, new String[]{Manifest.permission.CAMERA}, camera_request_code);
-//                }
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
+                if(ContextCompat.checkSelfPermission(IncarcareProdusActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
+                    ActivityCompat.requestPermissions(IncarcareProdusActivity.this, new String[]{Manifest.permission.CAMERA}, camera_request_code);
+                }
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                //Intent intent = new Intent();
+                //intent.setType("image/*");
+                //intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, camera_request_code);
             }
         });
@@ -159,6 +154,13 @@ public class IncarcareProdusActivity extends AppCompatActivity {
 
 
     public void getLocation() throws IOException {
+        try {
+            if (ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED ) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 101);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         gpsTracker = new GpsTracker(IncarcareProdusActivity.this);
         if(gpsTracker.canGetLocation()){
             double latitude = gpsTracker.getLatitude();
@@ -171,60 +173,46 @@ public class IncarcareProdusActivity extends AppCompatActivity {
     }
 
 
+
+
     @Override
     protected void onActivityResult(int requestcode, int resultcode, Intent data) {
         super.onActivityResult(requestcode, resultcode, data);
-
-//        if (requestcode == camera_request_code) {
-//            if (requestcode == camera_request_code && resultcode == RESULT_OK && data != null && data.getData() != null) {
-//            imagineuri = data.getData();
-//            imageview.setImageURI(imagineuri);
-//
-//            Picasso.with(this).load(imagineuri).into(imageview);
-
-            if(requestcode == camera_request_code && resultcode == RESULT_OK){
+            if (requestcode == camera_request_code && resultcode == RESULT_OK && data != null && data.getData() != null) {
                 imagineuri = data.getData();
-                //imageview.setImageURI(imagineuri);
-                Picasso.with(this).load(imagineuri).into(imageview);
-
-//                CropImage.activity(mImageUri)
-//                        .setGuidelines(CropImageView.Guidelines.ON)
-//                        .setAspectRatio(1,1)
-//                        .start(this);
-
-
-
-
-        /* Bitmap mImageUri1 = (Bitmap) data.getExtras().get("data");
-         mSelectImage.setImageBitmap(mImageUri1);
-
-          Toast.makeText(this, "Image saved to:\n" +
-                  data.getExtras().get("data"), Toast.LENGTH_LONG).show();
-
-
-*/
-                }
-
-//                if (requestcode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-//                    CropImage.ActivityResult result = CropImage.getActivityResult(data);
-//                    if (resultCode == RESULT_OK) {
-//                        Uri resultUri = result.getUri();
+                imageview.setImageURI(imagineuri);
+                System.out.println("hauahuahuahhuahauahuahauhuahuhauahuahau");
+                //imageview.setImageBitmap(imagineuri);
+                //Picasso.with(this).load(imagineuri).into(imageview);
+//                Picasso.with(this)
+//                        .load(imagineuri)
+//                        .into(new Target() {
+//                            @Override
+//                            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+//                                // Todo: Do something with your bitmap here
+//                                imageview.setImageBitmap(bitmap);
+//                            }
 //
-//                        imageview.setImageURI(resultUri);
-//                        imagineuri = resultUri;
+//                            @Override
+//                            public void onBitmapFailed(Drawable errorDrawable) {
+//                            }
 //
-//                    } else if (resultcode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-//                        Exception error = result.getError();
-//                    }
-//                }
+//                            @Override
+//                            public void onPrepareLoad(Drawable placeHolderDrawable) {
+//                            }
+//                        });
 
-    }
+
+            }
+
+
+        }
 
     private void ViewSetup() {
         alegeImagine = findViewById(R.id.alege_fisier);
         incarcaImaginea = findViewById(R.id.incarca_fisier);
         nume_fisier = findViewById(R.id.nume_fisier);
-        imageview = findViewById(R.id.imageView);
+        imageview = findViewById(R.id.imageView4);
         progressbar = findViewById(R.id.progressBar);
         meniu = findViewById(R.id.button3);
         descriere_produs = findViewById(R.id.descriere_produs);

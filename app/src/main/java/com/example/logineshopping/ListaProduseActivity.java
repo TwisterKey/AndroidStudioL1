@@ -49,6 +49,7 @@ public class ListaProduseActivity extends AppCompatActivity {
     private String userID;
     private FirebaseUser mUser;
     private Context context;
+    private ImageView help;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class ListaProduseActivity extends AppCompatActivity {
         log_out = findViewById(R.id.Logout);
         adauga_produs = findViewById(R.id.Adaugare);
         profil = findViewById(R.id.Profil);
+        help = findViewById(R.id.Help);
 
 
         //update_produs.setVisibility(View.INVISIBLE);
@@ -146,6 +148,16 @@ public class ListaProduseActivity extends AppCompatActivity {
                 ListaProduseActivity.this.startActivity(intent);
             }
         });
+
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaProduseActivity.this, Obiective_apropiate.class);
+                ListaProduseActivity.this.startActivity(intent);
+            }
+        });
+
+
 
 
 
