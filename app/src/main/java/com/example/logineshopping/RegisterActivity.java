@@ -53,13 +53,15 @@ public class RegisterActivity extends AppCompatActivity {
                 String adresa = t4.getText().toString().trim();
                 String telefon = t5.getText().toString().trim();
                 String admin = "0";
+                final String[] id = new String[1];
 
                 mAuth.createUserWithEmailAndPassword(email, parola)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
-                                    User user = new User(nume, email, adresa, telefon, admin);
+                                    id[0] = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                    User user = new User(nume, email, adresa, telefon, admin, id[0]);
 
                                     FirebaseDatabase.getInstance().getReference("Users")
                                             .child(FirebaseAuth.getInstance().getCurrentUser().getUid())

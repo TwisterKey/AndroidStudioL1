@@ -38,13 +38,35 @@
         />
 
         <TextView
-            android:id="@+id/text_view_pret"
+            android:id="@+id/text_view_locatie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="locatie"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/text_view_timp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:text="Pret"
+            android:text="timp"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/text_view_numepersoana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="timp"
             android:textColor="@color/black"
             android:textSize="20sp" />
 
@@ -58,10 +80,7 @@
             android:id="@+id/Stergere_produs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stergere produs" /><![CDATA[
-
-        />
-    ]]>
+            android:text="Stergere produs" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

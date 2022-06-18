@@ -29,6 +29,8 @@
         tools:layout_editor_absoluteX="52dp"
         tools:layout_editor_absoluteY="240dp" />
 
+
+
         <Button
             android:id="@+id/incarca_fisier"
             android:layout_width="wrap_content"
@@ -37,33 +39,23 @@
             tools:layout_editor_absoluteX="207dp"
             tools:layout_editor_absoluteY="240dp" />
 
-    <EditText
-        android:id="@+id/nume_fisier"
-        android:hint="Numele produsului"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="167dp" />
+        <EditText
+            android:id="@+id/nume_fisier"
+            android:layout_width="183dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Numele produsului"
+            android:inputType="textMultiLine"
+            tools:layout_editor_absoluteX="100dp"
+            tools:layout_editor_absoluteY="167dp" />
+
 
         <EditText
             android:id="@+id/descriere_produs"
+            android:layout_width="181dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
             android:hint="Descrierea produsului"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textMultiLine"
-            android:visibility="visible"
-            tools:layout_editor_absoluteX="101dp"
-            tools:layout_editor_absoluteY="315dp" />
-
-        <EditText
-            android:id="@+id/pret_produs"
-            android:hint="Pretul produsului"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="10"
             android:inputType="textMultiLine"
             android:visibility="visible"
             tools:layout_editor_absoluteX="101dp"
@@ -86,6 +78,8 @@
             tools:layout_editor_absoluteY="95dp" />
 
 
-</LinearLayout>
+
+
+    </LinearLayout>
 
 </ScrollView>

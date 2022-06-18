@@ -48,8 +48,6 @@ public class ListaProduseActivity extends AppCompatActivity {
     private ImageView profil;
     private String userID;
     private FirebaseUser mUser;
-    private Button update_produs;
-    private Button stergere_produs;
     private Context context;
 
     @Override
@@ -61,8 +59,6 @@ public class ListaProduseActivity extends AppCompatActivity {
         log_out = findViewById(R.id.Logout);
         adauga_produs = findViewById(R.id.Adaugare);
         profil = findViewById(R.id.Profil);
-        update_produs = findViewById(R.id.Update_produs);
-        stergere_produs = findViewById(R.id.Stergere_produs);
 
 
         //update_produs.setVisibility(View.INVISIBLE);
@@ -76,7 +72,7 @@ public class ListaProduseActivity extends AppCompatActivity {
             //Toast.makeText(ListaProduseActivity.this, "Bine ati revenit!", Toast.LENGTH_SHORT).show();
             cos.setVisibility(View.VISIBLE);
             log_out.setVisibility(View.VISIBLE);
-            adauga_produs.setVisibility(View.INVISIBLE);
+            adauga_produs.setVisibility(View.VISIBLE);
             profil.setVisibility(View.VISIBLE);
             cont.setVisibility(View.INVISIBLE);
 
@@ -89,12 +85,11 @@ public class ListaProduseActivity extends AppCompatActivity {
                     String veradmin = userProfile.admin;
                     if(veradmin.equals("1")) {
                         System.out.println("-----------------------------------------------------"+veradmin);
-                        adauga_produs.setVisibility(View.VISIBLE);
+//                        adauga_produs.setVisibility(View.VISIBLE);
                         //update_produs.setVisibility(View.VISIBLE);
                         //stergere_produs.setVisibility(View.VISIBLE);
                     }
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
 

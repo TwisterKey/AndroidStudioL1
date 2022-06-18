@@ -4,21 +4,54 @@ public class Produs {
     private String imageUrl;
     private String name;
     private String descriere;
-    private String pret;
+    private String locatie;
+    private String timp;
     private String id;
+    private String latitudine;
+    private String longitudine;
+    private String idpersoana;
 
     public Produs() {
 
     }
 
-    public Produs(String imageUrl, String name, String descriere, String pret) {
+    public Produs(String imageUrl, String name, String descriere, String idpersoana, String locatie, String timp, String latitudine, String longitudine) {
         if (name.trim().equals(""))
             name = "Fara nume";
         this.imageUrl = imageUrl;
         this.name = name;
         this.descriere = descriere;
-        this.pret = pret;
+        this.locatie = locatie;
+        this.timp = timp;
         this.id = id;
+        this.latitudine = latitudine;
+        this.longitudine = longitudine;
+        this.idpersoana  = idpersoana;
+    }
+
+
+    public String getIdpersoana() {
+        return idpersoana;
+    }
+
+    public void setIdpersoana(String idpersoana) {
+        this.idpersoana = idpersoana;
+    }
+
+    public String getLatitudine() {
+        return latitudine;
+    }
+
+    public void setLatitudine(String latitudine) {
+        this.latitudine = latitudine;
+    }
+
+    public String getLongitudine() {
+        return longitudine;
+    }
+
+    public void setLongitudine(String longitudine) {
+        this.longitudine = longitudine;
     }
 
     public String getId() {
@@ -46,19 +79,22 @@ public class Produs {
         this.name = name;
     }
 
-    public String getDescriere() {
-        return descriere;
+    public String getLocatie() {
+        return locatie;
     }
+    public void setLocatie(String locatie){this.locatie=locatie;}
 
     public void setDescriere(String descriere) {
         this.descriere = descriere;
     }
 
-    public String getPret() {
-        return pret;
+    public String getDescriere(){return descriere;}
+
+    public String getTimp() {
+        return timp;
     }
 
-    public void setPret(String pret) {
-        this.pret = pret;
+    public void setTimp(String timp) {
+        this.timp = timp;
     }
 }

@@ -4,20 +4,28 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class User {
-    public String nume, email, adresa, numar_telefon, admin;
+    public String nume, email, adresa, numar_telefon, admin, id;
 
     public User() {
 
     }
 
-    public User(String nume, String email, String adresa, String numar_telefon, String admin) {
+    public User(String nume, String email, String adresa, String numar_telefon, String admin, String id) {
         this.nume = nume;
         this.email = email;
         this.adresa = adresa;
         this.numar_telefon = numar_telefon;
         this.admin = admin;
+        this.id = id;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getNume() {
         return nume;
