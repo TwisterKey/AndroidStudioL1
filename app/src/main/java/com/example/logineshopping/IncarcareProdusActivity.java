@@ -1,7 +1,9 @@
 package com.example.logineshopping;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -58,6 +60,9 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.security.SignatureSpi;
 import java.text.SimpleDateFormat;
@@ -66,19 +71,17 @@ import java.util.List;
 import java.util.Locale;
 
 public class IncarcareProdusActivity extends AppCompatActivity {
-    private static final int camera_request_code = 1;
+    private static final int camera_request_code = 100;
+    private static final int MY_CAMERA_PERMISSION_CODE = 500;
 
     private Button alegeImagine;
     private Button incarcaImaginea;
-    private TextView arata_incarcatele;
     private EditText nume_fisier;
     private ImageView imageview;
     private ProgressBar progressbar;
     private Button meniu;
     private EditText descriere_produs;
-    private EditText pret_prdus;
     private FirebaseUser mUser;
-
 
     private Uri imagineuri;
 
@@ -89,6 +92,7 @@ public class IncarcareProdusActivity extends AppCompatActivity {
     private TextView t2;
     private Geocoder geocoder;
     private List<Address> addresses;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,25 +106,23 @@ public class IncarcareProdusActivity extends AppCompatActivity {
 
         geocoder = new Geocoder(this, Locale.getDefault());
 
-
-
-
-//        if(ContextCompat.checkSelfPermission(IncarcareProdusActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
-//            ActivityCompat.requestPermissions(IncarcareProdusActivity.this, new String[]{Manifest.permission.CAMERA}, camera_request_code);
-//        }
-
-
         alegeImagine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(ContextCompat.checkSelfPermission(IncarcareProdusActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(IncarcareProdusActivity.this, new String[]{Manifest.permission.CAMERA}, camera_request_code);
                 }
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                //Intent intent = new Intent();
-                //intent.setType("image/*");
-                //intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, camera_request_code);
+                else {
+
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    //File photo = new File(photoPath);
+                    //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+                    //imagineuri=Uri.fromFile(photo);
+                    //Intent intent = new Intent();
+                    //intent.setType("image/*");
+                    //intent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(intent, camera_request_code);
+                }
             }
         });
 
@@ -166,47 +168,46 @@ public class IncarcareProdusActivity extends AppCompatActivity {
             double latitude = gpsTracker.getLatitude();
             double longitude = gpsTracker.getLongitude();
             addresses = geocoder.getFromLocation(latitude, longitude, 1);
-            //t1.setText(addresses.get(0).getAddressLine(0));
         }else{
             gpsTracker.showSettingsAlert();
         }
     }
 
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults)
+    {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == MY_CAMERA_PERMISSION_CODE)
+        {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED)
+            {
+                Toast.makeText(this, "camera permission granted", Toast.LENGTH_LONG).show();
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, camera_request_code);
+            }
+            else
+            {
+                Toast.makeText(this, "camera permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
 
 
     @Override
     protected void onActivityResult(int requestcode, int resultcode, Intent data) {
         super.onActivityResult(requestcode, resultcode, data);
-            if (requestcode == camera_request_code && resultcode == RESULT_OK && data != null && data.getData() != null) {
-                imagineuri = data.getData();
+            if (requestcode == camera_request_code && resultcode == Activity.RESULT_OK) {
+                Bitmap image = (Bitmap) data.getExtras().get("data");
+                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+                image.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+                String path = MediaStore.Images.Media.insertImage(getApplicationContext().getContentResolver(), image, "val", null);
+                imagineuri = Uri.parse(path);
                 imageview.setImageURI(imagineuri);
-                System.out.println("hauahuahuahhuahauahuahauhuahuhauahuahau");
-                //imageview.setImageBitmap(imagineuri);
-                //Picasso.with(this).load(imagineuri).into(imageview);
-//                Picasso.with(this)
-//                        .load(imagineuri)
-//                        .into(new Target() {
-//                            @Override
-//                            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-//                                // Todo: Do something with your bitmap here
-//                                imageview.setImageBitmap(bitmap);
-//                            }
-//
-//                            @Override
-//                            public void onBitmapFailed(Drawable errorDrawable) {
-//                            }
-//
-//                            @Override
-//                            public void onPrepareLoad(Drawable placeHolderDrawable) {
-//                            }
-//                        });
-
-
             }
-
-
         }
+
 
     private void ViewSetup() {
         alegeImagine = findViewById(R.id.alege_fisier);
@@ -285,7 +286,7 @@ public class IncarcareProdusActivity extends AppCompatActivity {
                         } //cum se incarca bara de progres
                     });
         } else {
-            Toast.makeText(this, "Nu ati selectat fisier", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Nu ati facut poza", Toast.LENGTH_SHORT).show();
         }
     }
 }

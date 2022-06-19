@@ -63,7 +63,7 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="284dp"
+            android:layout_width="411dp"
             android:layout_height="318dp"
             tools:layout_editor_absoluteX="63dp"
             tools:layout_editor_absoluteY="384dp"

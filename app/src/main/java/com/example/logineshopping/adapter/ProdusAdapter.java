@@ -114,7 +114,13 @@ public class ProdusAdapter extends RecyclerView.Adapter<ProdusAdapter.ProdusView
 
 
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            String str;
+            @Override
+            public void onClick(View v) {
 
+            }
+        });
         holder.stergere_produs.setTag(produsCurent.getId());
     }
 

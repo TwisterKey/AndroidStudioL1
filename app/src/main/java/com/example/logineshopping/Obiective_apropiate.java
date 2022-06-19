@@ -13,6 +13,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.logineshopping.adapter.ProdusAdapter;
@@ -37,6 +38,7 @@ public class Obiective_apropiate extends AppCompatActivity {
     private List<Produs> mProduse;
     private ProdusAdapter mAdapter;
     private Context context;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

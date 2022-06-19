@@ -38,9 +38,6 @@ public class UpdateProdus extends AppCompatActivity {
     private Button meniu;
     private EditText descriere_produs;
     private Button Update;
-    //private static final int pick_image_request = 1;
-
-    //private Uri imagineuri;
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
@@ -94,7 +91,6 @@ public class UpdateProdus extends AppCompatActivity {
         String _nume, _descriere, _pret;
         _nume = nume_fisier.getText().toString();
         _descriere = descriere_produs.getText().toString();
-        //_pret = pret_prdus.getText().toString();
 
         meniu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,61 +108,12 @@ public class UpdateProdus extends AppCompatActivity {
 
                 if (!_descriere.equals(descriere_produs.getText().toString()))
                     mDatabaseRef.child(id).child("descriere").setValue(descriere_produs.getText().toString());
-
-//                if (!_pret.equals(pret_prdus.getText().toString()))
-//                    mDatabaseRef.child(id).child("pret").setValue(pret_prdus.getText().toString());
-//                if(imagineuri!=null){
-//                    mStorageRef.child(id).child("imagineUrl");
-//                    mStorageRef.putFile(imagineuri)
-//                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//                                @Override
-//                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                                   mStorageRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                                        @Override
-//                                        public void onSuccess(Uri uri) {
-//                                            Toast.makeText(UpdateProdus.this, "Succes", Toast.LENGTH_SHORT).show();
-//
-//                                        }
-//                                    });
-//
-//                                    Handler handler = new Handler();
-//                                    handler.postDelayed(new Runnable() {
-//                                        @Override
-//                                        public void run() {
-//                                            progressbar.setProgress(0);
-//                                        }
-//                                    }, 5000); // da delay la progressbar pentru 5 secunde
-//                                }
-//
-//                            })
-//                            .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-//                                @Override
-//                                public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-//                                    double progress = (100.0 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
-//                                    progressbar.setProgress((int) progress);
-//                                } //cum se incarca bara de progres
-//                            });
-//                }
+                Intent intent = new Intent(UpdateProdus.this, ListaProduseActivity.class);
+                UpdateProdus.this.startActivity(intent);
             }
         });
     }
 
-//    protected void onActivityResult(int requestcode, int resultcode, Intent data) {
-//        super.onActivityResult(requestcode, resultcode, data);
-//
-//        if (requestcode == pick_image_request && resultcode == RESULT_OK && data != null && data.getData() != null) {
-//            imagineuri = data.getData();
-//
-//            Picasso.with(this).load(imagineuri).into(imageview);
-//        }
-//    }
-//
-//    private String getFileExtension(Uri uri) {
-//        ContentResolver cR = getContentResolver();
-//        MimeTypeMap mime = MimeTypeMap.getSingleton();
-//
-//        return mime.getExtensionFromMimeType(cR.getType(uri));
-//    }
 
     private void ViewSetup() {
         nume_fisier = findViewById(R.id.nume_fisier);
@@ -179,4 +126,8 @@ public class UpdateProdus extends AppCompatActivity {
     }
 
     public String getId(){ return id;}
+
+    public void onBackPressed() {
+        finish();
+    }
 }
