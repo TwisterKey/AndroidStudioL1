@@ -20,7 +20,10 @@
         android:id="@+id/searchView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar" />
+        android:layout_below="@+id/toolbar"
+        app:queryHint="Introduceti locatia"
+        app:iconifiedByDefault="false"
+        />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_view"
