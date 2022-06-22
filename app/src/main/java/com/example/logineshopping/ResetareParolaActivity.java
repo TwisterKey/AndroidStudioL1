@@ -18,6 +18,7 @@ public class ResetareParolaActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Button reset;
     private EditText t1;
+    private Button revenire;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +49,20 @@ public class ResetareParolaActivity extends AppCompatActivity {
                 ResetareParolaActivity.this.startActivity(intent);
             }
         });
+
+        revenire.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ResetareParolaActivity.this, Login.class);
+                ResetareParolaActivity.this.startActivity(intent);
+            }
+        });
     }
 
     private void viewSetup() {
         reset = findViewById(R.id.button2);
         t1 = findViewById(R.id.editTextTextPersonName2);
+        revenire = findViewById(R.id.button5);
+
     }
 }

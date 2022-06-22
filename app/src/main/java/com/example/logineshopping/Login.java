@@ -27,6 +27,7 @@ public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText t1;
     private EditText t2;
+    private Button galerie;
     //private static final String TAG = "EmailPassword";
 
     @Override
@@ -75,9 +76,18 @@ public class Login extends AppCompatActivity {
                 Login.this.startActivity(intent);
             }
         });
+
+        galerie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Login.this, ListaProduseActivity.class);
+                Login.this.startActivity(intent);
+            }
+        });
     }
 
     private void viewSetup() {
+        galerie = findViewById(R.id.button112);
         reset = findViewById(R.id.button);
         login = findViewById(R.id.login);
         register = findViewById(R.id.register);

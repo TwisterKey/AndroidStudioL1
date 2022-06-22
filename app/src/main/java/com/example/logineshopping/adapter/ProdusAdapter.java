@@ -63,6 +63,13 @@ public class ProdusAdapter extends RecyclerView.Adapter<ProdusAdapter.ProdusView
         firestore = FirebaseFirestore.getInstance();
     }
 
+    public void setFilteredList(List<Produs> filteredList){
+        this.produsList = filteredList;
+        notifyDataSetChanged();
+    }
+
+
+
     @NonNull
     @Override
     public ProdusViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -139,6 +146,7 @@ public class ProdusAdapter extends RecyclerView.Adapter<ProdusAdapter.ProdusView
         public Button update_produs;
         private TextView timp;
         private TextView numepersoana;
+
 
         public ProdusViewHolder(@NonNull View itemView) {
             super(itemView);

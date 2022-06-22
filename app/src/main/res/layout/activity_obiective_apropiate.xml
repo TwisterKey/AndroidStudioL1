@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".Obiective_apropiate">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"></include>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle1"
@@ -19,5 +22,6 @@
         android:layout_height="wrap_content"
         android:text="Pozele facute pe o distanta mai mica de 1 km"
         android:textSize="18sp"
+        android:layout_below="@+id/toolbar"
         />
 </RelativeLayout>

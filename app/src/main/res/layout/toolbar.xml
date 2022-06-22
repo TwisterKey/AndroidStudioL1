@@ -15,7 +15,7 @@
             android:layout_margin="16dp"></ImageView>
 
         <ImageView
-            android:id="@+id/Cart"
+            android:id="@+id/Galerie"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -23,15 +23,26 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:layout_toRightOf="@+id/Cont"
-            android:src="@drawable/ic_baseline_shopping_cart_24"></ImageView>
+            android:src="@drawable/ic_baseline_photo_library_24"></ImageView>
 
         <ImageView
             android:id="@+id/Help"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/Cart"
-            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toRightOf="@+id/Locuri_apropiate"
             android:src="@drawable/ic_baseline_help_center_24"></ImageView>
+
+        <ImageView
+            android:id="@+id/Locuri_apropiate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/Galerie"
+            android:layout_margin="16dp"
+            android:src="@drawable/ic_baseline_my_location_24"></ImageView>
 
         <ImageView
             android:id="@+id/Profil"
@@ -45,16 +56,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toRightOf="@+id/Adaugare"
             android:src="@drawable/ic_baseline_close_24"></ImageView>
 
         <ImageView
             android:id="@+id/Adaugare"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/Logout"
-            android:layout_margin="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toRightOf="@+id/Galerie_proprie"
             android:src="@drawable/ic_baseline_add_to_photos_24"></ImageView>
+
+        <ImageView
+            android:id="@+id/Galerie_proprie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_toRightOf="@+id/Help"
+            android:src="@drawable/ic_baseline_insert_photo_24"></ImageView>
 
 
     </RelativeLayout>

@@ -2,29 +2,27 @@ package com.example.logineshopping;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.location.Location;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.logineshopping.adapter.ProdusAdapter;
 import com.example.logineshopping.model.Produs;
 import com.example.logineshopping.model.User;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -33,38 +31,55 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ListaProduseActivity extends AppCompatActivity {
     private RecyclerView mRecyclerview;
     private ProdusAdapter mAdapter;
-    private ProgressBar mProgressCircle;
     private DatabaseReference mDabaseRef;
     private DatabaseReference ref;
     private List<Produs> mProduse;
     private ImageView cont;
-    private ImageView cos;
+    private ImageView galerie;
     private ImageView log_out;
-    private ImageView adauga_produs;
+    private ImageView locatie_aproape;
+    private ImageView adauga_view;
     private ImageView profil;
-    private String userID;
-    private FirebaseUser mUser;
-    private Context context;
     private ImageView help;
+    private ImageView galIndivid;
+    private FirebaseUser mUser;
+    private SearchView search;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_produse);
         cont = findViewById(R.id.Cont);
-        cos = findViewById(R.id.Cart);
+        galerie = findViewById(R.id.Galerie);
         log_out = findViewById(R.id.Logout);
-        adauga_produs = findViewById(R.id.Adaugare);
+        adauga_view = findViewById(R.id.Adaugare);
         profil = findViewById(R.id.Profil);
         help = findViewById(R.id.Help);
+        locatie_aproape = findViewById(R.id.Locuri_apropiate);
+        galIndivid = findViewById(R.id.Galerie_proprie);
 
 
-        //update_produs.setVisibility(View.INVISIBLE);
-        //stergere_produs.setVisibility(View.INVISIBLE);
+        search = findViewById(R.id.searchView);
+        search.clearFocus();
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
         ref = FirebaseDatabase.getInstance().getReference("Users");
@@ -72,38 +87,19 @@ public class ListaProduseActivity extends AppCompatActivity {
 
         if (mUser != null) {
             //Toast.makeText(ListaProduseActivity.this, "Bine ati revenit!", Toast.LENGTH_SHORT).show();
-            cos.setVisibility(View.VISIBLE);
+            galerie.setVisibility(View.VISIBLE);
             log_out.setVisibility(View.VISIBLE);
-            adauga_produs.setVisibility(View.VISIBLE);
+            adauga_view.setVisibility(View.VISIBLE);
             profil.setVisibility(View.VISIBLE);
             cont.setVisibility(View.INVISIBLE);
-
-            userID = mUser.getUid();
-
-            ref.child(userID).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    User userProfile = snapshot.getValue(User.class);
-                    String veradmin = userProfile.admin;
-                    if(veradmin.equals("1")) {
-                        System.out.println("-----------------------------------------------------"+veradmin);
-//                        adauga_produs.setVisibility(View.VISIBLE);
-                        //update_produs.setVisibility(View.VISIBLE);
-                        //stergere_produs.setVisibility(View.VISIBLE);
-                    }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
+            locatie_aproape.setVisibility(View.VISIBLE);
+            galIndivid.setVisibility(View.VISIBLE);
         } else {
-            cos.setVisibility(View.INVISIBLE);
-            log_out.setVisibility(View.INVISIBLE);
-            adauga_produs.setVisibility(View.INVISIBLE);
-            profil.setVisibility(View.INVISIBLE);
+            log_out.setVisibility(View.GONE);
+            adauga_view.setVisibility(View.GONE);
+            profil.setVisibility(View.GONE);
             cont.setVisibility(View.VISIBLE);
+            galIndivid.setVisibility(View.GONE);
         }
         //iau datele de la useri din baza de date
 
@@ -116,15 +112,14 @@ public class ListaProduseActivity extends AppCompatActivity {
             }
         });
         toolbar();
+        mDabaseRef = FirebaseDatabase.getInstance().getReference("Uploads");
+
 
         mRecyclerview = findViewById(R.id.recycle_view);
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(this));
 
-        mProgressCircle = findViewById(R.id.progress_circle);
-
         mProduse = new ArrayList<>();
-        mDabaseRef = FirebaseDatabase.getInstance().getReference("Uploads");
 
         mDabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -136,44 +131,53 @@ public class ListaProduseActivity extends AppCompatActivity {
 
                 mAdapter = new ProdusAdapter(ListaProduseActivity.this, mProduse);
                 mRecyclerview.setAdapter(mAdapter);
-                mProgressCircle.setVisibility(View.INVISIBLE);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
                 Toast.makeText(ListaProduseActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-                mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
 
 
     }
+
+    private void filterList(String text) {
+        List<Produs> filteredList = new ArrayList<>();
+        for(Produs item : mProduse){
+            if(item.getLocatie().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(item);
+            }
+        }
+        if(filteredList.isEmpty())
+            Toast.makeText(this, "Nu s-a gasit nimic", Toast.LENGTH_SHORT).show();
+        else{
+            mAdapter.setFilteredList(filteredList);
+        }
+    }
+
     public void toolbar(){
-        adauga_produs.setOnClickListener(new View.OnClickListener() {
+        adauga_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListaProduseActivity.this, IncarcareProdusActivity.class);
                 ListaProduseActivity.this.startActivity(intent);
             }
         });
-
-
         log_out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 Toast.makeText(ListaProduseActivity.this, "V-ati delogat cu succes", Toast.LENGTH_SHORT).show();
-                cos.setVisibility(View.INVISIBLE);
-                log_out.setVisibility(View.INVISIBLE);
-                adauga_produs.setVisibility(View.INVISIBLE);
-                profil.setVisibility(View.INVISIBLE);
+                galIndivid.setVisibility(View.GONE);
+                log_out.setVisibility(View.GONE);
+                adauga_view.setVisibility(View.GONE);
+                profil.setVisibility(View.GONE);
                 cont.setVisibility(View.VISIBLE);
                 finish();
                 startActivity(getIntent());
-
             }
         });
-
         profil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,7 +185,6 @@ public class ListaProduseActivity extends AppCompatActivity {
                 ListaProduseActivity.this.startActivity(intent);
             }
         });
-
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -189,7 +192,21 @@ public class ListaProduseActivity extends AppCompatActivity {
                 ListaProduseActivity.this.startActivity(intent);
             }
         });
-        cos.setOnClickListener(new View.OnClickListener() {
+        galerie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaProduseActivity.this, ListaProduseActivity.class);
+                ListaProduseActivity.this.startActivity(intent);
+            }
+        });
+        locatie_aproape.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaProduseActivity.this, Obiective_apropiate.class);
+                ListaProduseActivity.this.startActivity(intent);
+            }
+        });
+        galIndivid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ListaProduseActivity.this, Poze_useri.class);

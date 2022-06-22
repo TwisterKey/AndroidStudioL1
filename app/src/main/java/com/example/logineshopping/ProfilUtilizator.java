@@ -23,6 +23,7 @@ public class ProfilUtilizator extends AppCompatActivity {
     private FirebaseUser user;
     private DatabaseReference referance;
     private Button editare;
+    private Button galerie;
 
     private String userID;
 
@@ -32,6 +33,7 @@ public class ProfilUtilizator extends AppCompatActivity {
         setContentView(R.layout.activity_profil_utilizator);
 
         editare = (Button) findViewById(R.id.button4);
+        galerie = findViewById(R.id.button7);
         user = FirebaseAuth.getInstance().getCurrentUser();
         referance = FirebaseDatabase.getInstance().getReference("Users");
         userID = user.getUid();
@@ -69,6 +71,14 @@ public class ProfilUtilizator extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ProfilUtilizator.this, UpdateProfilUtilizator.class);
+                ProfilUtilizator.this.startActivity(intent);
+            }
+        });
+
+        galerie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProfilUtilizator.this, ListaProduseActivity.class);
                 ProfilUtilizator.this.startActivity(intent);
             }
         });

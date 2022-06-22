@@ -42,6 +42,7 @@ public class UpdateProfilUtilizator extends AppCompatActivity {
     private String userID;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private DocumentReference documentReference;
+    private Button galerie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class UpdateProfilUtilizator extends AppCompatActivity {
         editAdresa = findViewById(R.id.editTextTextAdresa);
         editTelefon = findViewById(R.id.editTextTextPersonTelefon);
         Update = findViewById(R.id.updateb);
+        galerie = findViewById(R.id.button6);
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -104,5 +106,13 @@ public class UpdateProfilUtilizator extends AppCompatActivity {
                 UpdateProfilUtilizator.this.startActivity(intent);
             }
         });
+        galerie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UpdateProfilUtilizator.this, ListaProduseActivity.class);
+                UpdateProfilUtilizator.this.startActivity(intent);
+            }
+        });
+
     }
 }

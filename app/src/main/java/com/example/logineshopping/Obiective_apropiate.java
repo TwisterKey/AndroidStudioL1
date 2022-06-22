@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import com.example.logineshopping.adapter.ProdusAdapter;
 import com.example.logineshopping.model.Produs;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +38,15 @@ public class Obiective_apropiate extends AppCompatActivity {
     private List<Produs> mProduse;
     private ProdusAdapter mAdapter;
     private Context context;
+    private ImageView cont;
+    private ImageView galerie;
+    private ImageView log_out;
+    private ImageView locatie_aproape;
+    private ImageView adauga_view;
+    private ImageView profil;
+    private ImageView help;
+    private ImageView galIndivid;
+    private FirebaseUser mUser;
 
 
     @Override
@@ -44,7 +55,9 @@ public class Obiective_apropiate extends AppCompatActivity {
         setContentView(R.layout.activity_obiective_apropiate);
         refprod = FirebaseDatabase.getInstance().getReference().child("Uploads");
         mRecyclerview = findViewById(R.id.recycle1);
-
+        tool();
+        toolbar();
+        verif();
         refprod.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -79,5 +92,95 @@ public class Obiective_apropiate extends AppCompatActivity {
             }
         });
 
+    }
+    public void tool(){
+        cont = findViewById(R.id.Cont);
+        galerie = findViewById(R.id.Galerie);
+        log_out = findViewById(R.id.Logout);
+        adauga_view = findViewById(R.id.Adaugare);
+        profil = findViewById(R.id.Profil);
+        help = findViewById(R.id.Help);
+        locatie_aproape = findViewById(R.id.Locuri_apropiate);
+        galIndivid = findViewById(R.id.Galerie_proprie);
+
+    }
+
+    public void verif(){
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (mUser != null) {
+            //Toast.makeText(ListaProduseActivity.this, "Bine ati revenit!", Toast.LENGTH_SHORT).show();
+            galerie.setVisibility(View.VISIBLE);
+            log_out.setVisibility(View.VISIBLE);
+            adauga_view.setVisibility(View.VISIBLE);
+            profil.setVisibility(View.VISIBLE);
+            cont.setVisibility(View.INVISIBLE);
+            locatie_aproape.setVisibility(View.VISIBLE);
+            galIndivid.setVisibility(View.VISIBLE);
+        } else {
+            log_out.setVisibility(View.GONE);
+            adauga_view.setVisibility(View.GONE);
+            profil.setVisibility(View.GONE);
+            cont.setVisibility(View.VISIBLE);
+            galIndivid.setVisibility(View.GONE);
+        }
+    }
+
+    public void toolbar(){
+        adauga_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Obiective_apropiate.this, IncarcareProdusActivity.class);
+                Obiective_apropiate.this.startActivity(intent);
+            }
+        });
+        log_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(Obiective_apropiate.this, "V-ati delogat cu succes", Toast.LENGTH_SHORT).show();
+                galIndivid.setVisibility(View.GONE);
+                log_out.setVisibility(View.GONE);
+                adauga_view.setVisibility(View.GONE);
+                profil.setVisibility(View.GONE);
+                cont.setVisibility(View.VISIBLE);
+                finish();
+                startActivity(getIntent());
+            }
+        });
+        profil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Obiective_apropiate.this, ProfilUtilizator.class);
+                Obiective_apropiate.this.startActivity(intent);
+            }
+        });
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Obiective_apropiate.this, Obiective_apropiate.class);
+                Obiective_apropiate.this.startActivity(intent);
+            }
+        });
+        galerie.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Obiective_apropiate.this, ListaProduseActivity.class);
+                Obiective_apropiate.this.startActivity(intent);
+            }
+        });
+        locatie_aproape.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Obiective_apropiate.this, Obiective_apropiate.class);
+                Obiective_apropiate.this.startActivity(intent);
+            }
+        });
+        galIndivid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Obiective_apropiate.this, Poze_useri.class);
+                Obiective_apropiate.this.startActivity(intent);
+            }
+        });
     }
 }
