@@ -115,51 +115,7 @@ public class ListaProduseActivity extends AppCompatActivity {
                 ListaProduseActivity.this.startActivity(intent);
             }
         });
-
-        adauga_produs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListaProduseActivity.this, IncarcareProdusActivity.class);
-                ListaProduseActivity.this.startActivity(intent);
-            }
-        });
-
-
-        log_out.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                Toast.makeText(ListaProduseActivity.this, "V-ati delogat cu succes", Toast.LENGTH_SHORT).show();
-                    cos.setVisibility(View.INVISIBLE);
-                    log_out.setVisibility(View.INVISIBLE);
-                    adauga_produs.setVisibility(View.INVISIBLE);
-                    profil.setVisibility(View.INVISIBLE);
-                    cont.setVisibility(View.VISIBLE);
-                finish();
-                startActivity(getIntent());
-
-            }
-        });
-
-        profil.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListaProduseActivity.this, ProfilUtilizator.class);
-                ListaProduseActivity.this.startActivity(intent);
-            }
-        });
-
-        help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ListaProduseActivity.this, Obiective_apropiate.class);
-                ListaProduseActivity.this.startActivity(intent);
-            }
-        });
-
-
-
-
+        toolbar();
 
         mRecyclerview = findViewById(R.id.recycle_view);
         mRecyclerview.setHasFixedSize(true);
@@ -192,6 +148,57 @@ public class ListaProduseActivity extends AppCompatActivity {
 
 
     }
+    public void toolbar(){
+        adauga_produs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaProduseActivity.this, IncarcareProdusActivity.class);
+                ListaProduseActivity.this.startActivity(intent);
+            }
+        });
+
+
+        log_out.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Toast.makeText(ListaProduseActivity.this, "V-ati delogat cu succes", Toast.LENGTH_SHORT).show();
+                cos.setVisibility(View.INVISIBLE);
+                log_out.setVisibility(View.INVISIBLE);
+                adauga_produs.setVisibility(View.INVISIBLE);
+                profil.setVisibility(View.INVISIBLE);
+                cont.setVisibility(View.VISIBLE);
+                finish();
+                startActivity(getIntent());
+
+            }
+        });
+
+        profil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaProduseActivity.this, ProfilUtilizator.class);
+                ListaProduseActivity.this.startActivity(intent);
+            }
+        });
+
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaProduseActivity.this, Obiective_apropiate.class);
+                ListaProduseActivity.this.startActivity(intent);
+            }
+        });
+        cos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListaProduseActivity.this, Poze_useri.class);
+                ListaProduseActivity.this.startActivity(intent);
+            }
+        });
+    }
+
+
 
     public void refreshActivity(){
         recreate();

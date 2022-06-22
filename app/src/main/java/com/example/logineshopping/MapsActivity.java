@@ -3,7 +3,11 @@ package com.example.logineshopping;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 
+import android.annotation.SuppressLint;
+import android.location.Location;
 import android.os.Bundle;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.logineshopping.model.Produs;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,6 +32,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private DatabaseReference mDatabaseRef;
     private StorageReference mStorageRef;
     private String id;
+    private GpsTracker gpsTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +66,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (extras != null) {
             id = extras.getString("id");
         }
+        gpsTracker = new GpsTracker(MapsActivity.this);
+        double tl = gpsTracker.getLatitude();
+        double tL = gpsTracker.getLongitude();
+        LatLng curenta = new LatLng(tl, tL);
+        mMap.addMarker(new MarkerOptions().position(curenta).title("Aici e pozitia ta"));
         mDatabaseRef.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -70,9 +80,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     String longitudine = produs.getLongitudine();
                     double l = Double.parseDouble(latitudine);
                     double L = Double.parseDouble(longitudine);
-
-                    String a = produs.getLocatie();
-                    System.out.println(a + "-------------------------------------------------");
+                    float[] results = new float[1];
+                    Location.distanceBetween(tl, tL, l, L, results);
+                    float d = results[0];
+                    @SuppressLint("DefaultLocale") String numar = String.format("%.2f", d);
+                    String text = "Te aflii la aproximativ "+ numar+" m de locatia curenta";
+                    Toast.makeText(MapsActivity.this, text, Toast.LENGTH_LONG).show();
 
                     LatLng sydney = new LatLng(l, L);
                     mMap.addMarker(new MarkerOptions().position(sydney).title("Aici a fost facuta poza"));
