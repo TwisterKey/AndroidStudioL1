@@ -25,7 +25,7 @@
         android:id="@+id/alege_fisier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Alege Fisier"
+        android:text="Fa poza"
         tools:layout_editor_absoluteX="52dp"
         tools:layout_editor_absoluteY="240dp" />
 
@@ -35,7 +35,7 @@
             android:id="@+id/incarca_fisier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Incarca fisier"
+            android:text="Incarca postarea"
             tools:layout_editor_absoluteX="207dp"
             tools:layout_editor_absoluteY="240dp" />
 
@@ -73,7 +73,7 @@
             android:id="@+id/button3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Meniu"
+            android:text="Galerie"
             tools:layout_editor_absoluteX="162dp"
             tools:layout_editor_absoluteY="95dp" />
 

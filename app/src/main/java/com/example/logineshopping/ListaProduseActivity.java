@@ -150,7 +150,7 @@ public class ListaProduseActivity extends AppCompatActivity {
             }
         }
         if(filteredList.isEmpty())
-            Toast.makeText(this, "Nu s-a gasit nimic", Toast.LENGTH_SHORT).show();
+            System.out.println("Nu s-a gasit nimic");
         else{
             mAdapter.setFilteredList(filteredList);
         }
