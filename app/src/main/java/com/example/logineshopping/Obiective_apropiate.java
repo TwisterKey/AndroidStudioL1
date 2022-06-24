@@ -157,7 +157,7 @@ public class Obiective_apropiate extends AppCompatActivity {
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Obiective_apropiate.this, Obiective_apropiate.class);
+                Intent intent = new Intent(Obiective_apropiate.this, Info.class);
                 Obiective_apropiate.this.startActivity(intent);
             }
         });

@@ -37,7 +37,6 @@ public class ListaProduseActivity extends AppCompatActivity {
     private RecyclerView mRecyclerview;
     private ProdusAdapter mAdapter;
     private DatabaseReference mDabaseRef;
-    private DatabaseReference ref;
     private List<Produs> mProduse;
     private ImageView cont;
     private ImageView galerie;
@@ -82,7 +81,6 @@ public class ListaProduseActivity extends AppCompatActivity {
         });
 
         mUser = FirebaseAuth.getInstance().getCurrentUser();
-        ref = FirebaseDatabase.getInstance().getReference("Users");
 
 
         if (mUser != null) {
@@ -188,7 +186,7 @@ public class ListaProduseActivity extends AppCompatActivity {
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListaProduseActivity.this, Obiective_apropiate.class);
+                Intent intent = new Intent(ListaProduseActivity.this, Info.class);
                 ListaProduseActivity.this.startActivity(intent);
             }
         });

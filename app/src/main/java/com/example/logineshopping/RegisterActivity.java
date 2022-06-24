@@ -10,12 +10,16 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.logineshopping.model.Produs;
 import com.example.logineshopping.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegisterActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -26,12 +30,14 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText t3;
     private EditText t4;
     private EditText t5;
+    private List<User> mUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
+        mUsers = new ArrayList<>();
+        List<Produs> filteredList = new ArrayList<>();
         mAuth = FirebaseAuth.getInstance();
 
         viewSetup();
@@ -77,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
                                                 }
                                             });
                                 } else {
-                                    Toast.makeText(RegisterActivity.this, "Verificati conectarea la internet", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(RegisterActivity.this, "Nu s-a putut creea contul", Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
