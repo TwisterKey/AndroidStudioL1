@@ -80,7 +80,7 @@
             android:id="@+id/Stergere_produs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stergere produs" />
+            android:text="Stergere postare" />
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

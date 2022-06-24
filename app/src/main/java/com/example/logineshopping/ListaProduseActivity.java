@@ -111,8 +111,6 @@ public class ListaProduseActivity extends AppCompatActivity {
         });
         toolbar();
         mDabaseRef = FirebaseDatabase.getInstance().getReference("Uploads");
-
-
         mRecyclerview = findViewById(R.id.recycle_view);
         mRecyclerview.setHasFixedSize(true);
         mRecyclerview.setLayoutManager(new LinearLayoutManager(this));

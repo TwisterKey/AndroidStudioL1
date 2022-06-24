@@ -44,7 +44,7 @@
             android:layout_width="183dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Numele produsului"
+            android:hint="Numele postarii"
             android:inputType="textMultiLine"
             tools:layout_editor_absoluteX="100dp"
             tools:layout_editor_absoluteY="167dp" />
@@ -55,7 +55,7 @@
             android:layout_width="181dp"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Descrierea produsului"
+            android:hint="Descrierea postarii"
             android:inputType="textMultiLine"
             android:visibility="visible"
             tools:layout_editor_absoluteX="101dp"
