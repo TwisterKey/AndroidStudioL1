@@ -84,7 +84,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     Location.distanceBetween(tl, tL, l, L, results);
                     float d = results[0];
                     @SuppressLint("DefaultLocale") String numar = String.format("%.2f", d);
-                    String text = "Te aflii la aproximativ "+ numar+" m de locatia curenta";
+                    String text = "Te afli la aproximativ "+ numar+" m de locatia curenta";
                     Toast.makeText(MapsActivity.this, text, Toast.LENGTH_LONG).show();
 
                     LatLng sydney = new LatLng(l, L);
